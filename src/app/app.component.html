@@ -1,7 +1,9 @@
 <div class="mat-display-1 gm-toolbar">Gamemaster Tools</div>
-<mat-form-field class="roll-history-container" appearance="fill">
-    <mat-label>Roll History</mat-label>
-    <textarea class="roll-history" matInput placeholder="You rolled 100!" [ngModel]="rollHistory | async | history" (ngModelChange)="rollHistory" readonly></textarea>
-</mat-form-field>
+<div class="container">
+    <mat-form-field class="roll-history-container" appearance="fill">
+        <mat-label>Roll History</mat-label>
+        <textarea class="roll-history" matInput placeholder="You rolled 100!" [ngModel]="rollHistory | async | history" (ngModelChange)="rollHistory" readonly></textarea>
+    </mat-form-field>
+</div>
 <gm-table-add></gm-table-add>
 <!-- <router-outlet></router-outlet> -->

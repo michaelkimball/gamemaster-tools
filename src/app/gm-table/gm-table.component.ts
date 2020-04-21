@@ -11,6 +11,8 @@ import { UpdateTableAction } from '../store/action/table.action';
 import { v4 as uuid } from 'uuid';
 import { AddRollHistoryAction } from '../store/action/roll-history.action';
 import { formatDate } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RollMessageComponent } from '../roll-message/roll-message.component';
 
 @Component({
   selector: 'gm-table',
@@ -27,7 +29,8 @@ export class GmTableComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<GmTableItemEditComponent>,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private snackBar: MatSnackBar
   ) {
     this.tableForm = this.formBuilder.group({
       description: '',
@@ -108,6 +111,7 @@ export class GmTableComponent implements OnInit {
       if(this.tableData.items[i].weight >= roll){
         let rollLog = `${formatDate(new Date(), 'M/d/yy, h:mm:ss a', 'en-US')}   ${this.tableData.items[i].description}`;
         this.store.dispatch(new AddRollHistoryAction(rollLog));
+        this.snackBar.openFromComponent(RollMessageComponent, { data: this.tableData.items[i].description });
         break;
       }
       roll -= this.tableData.items[i].weight;

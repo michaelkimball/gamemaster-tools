@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { GmTableAddComponent } from './gm-table-add/gm-table-add.component';
 import { GmTableComponent } from './gm-table/gm-table.component';
 import { GmTableItemEditComponent } from './gm-table-item-edit/gm-table-item-edit.component';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableEffects } from './store/effect/table.effect';
 import { RollHistoryReducer } from './store/reducer/roll-history.reducer';
 import { HistoryPipe } from './history.pipe';
+import { RollMessageComponent } from './roll-message/roll-message.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HistoryPipe } from './history.pipe';
     GmTableAddComponent,
     GmTableComponent,
     GmTableItemEditComponent,
+    RollMessageComponent,
     HistoryPipe
   ],
   imports: [
@@ -37,21 +39,19 @@ import { HistoryPipe } from './history.pipe';
     BrowserAnimationsModule,
     MaterialModule,
     DragDropModule,
-    MatDialogModule,
     StoreModule.forRoot({
       tables: TableReducer,
       rollHistory: RollHistoryReducer
     }),
     EffectsModule.forRoot([TableEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   entryComponents: [
     GmTableItemEditComponent
   ],
-  providers: [
-    { provide: MatDialogRef, useValue: {} }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
