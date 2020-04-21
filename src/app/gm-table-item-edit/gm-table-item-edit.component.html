@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Update Item</h2>
+<form [formGroup]="tableForm" (ngSubmit)="onUpdateClick(tableForm.value)">
+    <mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Item</mat-label>
+            <input id="item" matInput formControlName="description" [value]="data.description">
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input id="weight" type="number" matInput formControlName="weight" [value]="data.weight">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="submit" mat-flat-button color="accent">Update</button>
+        <button mat-flat-button type="button" color="warn" (click)="onDeleteClick()">Delete</button>
+    </mat-dialog-actions>
+</form>

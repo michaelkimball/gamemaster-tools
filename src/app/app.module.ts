@@ -1,18 +1,57 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { GmTableAddComponent } from './gm-table-add/gm-table-add.component';
+import { GmTableComponent } from './gm-table/gm-table.component';
+import { GmTableItemEditComponent } from './gm-table-item-edit/gm-table-item-edit.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { TableReducer } from './store/reducer/table.reducer';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { TableEffects } from './store/effect/table.effect';
+import { RollHistoryReducer } from './store/reducer/roll-history.reducer';
+import { HistoryPipe } from './history.pipe';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GmTableAddComponent,
+    GmTableComponent,
+    GmTableItemEditComponent,
+    HistoryPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    DragDropModule,
+    MatDialogModule,
+    StoreModule.forRoot({
+      tables: TableReducer,
+      rollHistory: RollHistoryReducer
+    }),
+    EffectsModule.forRoot([TableEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    HttpClientModule
   ],
-  providers: [],
+  entryComponents: [
+    GmTableItemEditComponent
+  ],
+  providers: [
+    { provide: MatDialogRef, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

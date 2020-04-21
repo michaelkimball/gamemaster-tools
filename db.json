@@ -1,0 +1,88 @@
+{
+  "tables": [
+    {
+      "id": "1",
+      "name": "Hardcoded Table",
+      "items": [
+        {
+          "description": "french fry",
+          "weight": 1,
+          "position": 1,
+          "id": "790fb4ac-0df4-475f-8e2d-f4f8000db35d"
+        },
+        {
+          "description": "tater tot",
+          "weight": 1,
+          "position": 2,
+          "id": "ad1f7b71-9878-4783-bae1-5949d1c8b477"
+        },
+        {
+          "description": "baked potato",
+          "weight": 1,
+          "position": 3,
+          "id": "a9009cc6-4bb7-405e-9a0f-103b7eebe87d"
+        },
+        {
+          "description": "scalloped potatoes",
+          "weight": 1,
+          "position": 4,
+          "id": "d652a872-99e1-4537-985f-56f5c0fc10b5"
+        },
+        {
+          "description": "hashbrowns",
+          "weight": 1,
+          "position": 5,
+          "id": "ad5319ea-3cf9-4997-b4ab-bb6b41a84167"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Other Hardcoded Table",
+      "items": [
+        {
+          "description": "asdasdas",
+          "weight": 1,
+          "position": 1,
+          "id": "deec1d27-c1fb-483e-a4a3-3af13ca95d4e"
+        },
+        {
+          "description": "the second choice",
+          "weight": 1,
+          "position": 2,
+          "id": "b86527d7-d9b1-4de5-9a01-96c6ddcf2ae6"
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "items": [
+        {
+          "description": "sssss",
+          "weight": 1,
+          "position": 1,
+          "id": "6b7dbb43-b70d-41ba-9368-96c867ebed47"
+        }
+      ],
+      "id": "b053ad84-7297-4b37-8045-0e6db0a7cdf5"
+    },
+    {
+      "name": "pizza",
+      "items": [
+        {
+          "description": "cheese",
+          "weight": 1,
+          "position": 1,
+          "id": "864972d1-b90d-4a55-81b7-33ca25df436d"
+        },
+        {
+          "description": "pepperoni",
+          "weight": 1,
+          "position": 2,
+          "id": "99d48a62-89f6-4d0f-b396-b04e7111eb95"
+        }
+      ],
+      "id": "26c3597d-bcfd-4807-9f99-37de493a1487"
+    }
+  ]
+}

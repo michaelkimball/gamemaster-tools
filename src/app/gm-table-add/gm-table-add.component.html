@@ -1,0 +1,19 @@
+<div class="container">
+    <form [formGroup]="tableAddForm" (ngSubmit)="onSubmit(tableAddForm.value)">
+        <mat-card>
+            <mat-card-title>Add New Table</mat-card-title>
+            <mat-card-content class="card-content-inline">
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input id="name" matInput formControlName="name">
+                </mat-form-field>
+                <button mat-mini-fab color="accent" aria-label="Add table button with plus sign">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>
+<div class="tables">
+    <gm-table *ngFor="let table of tables$ | async" [tableData]="table" ></gm-table>
+</div>
