@@ -21,6 +21,7 @@ import { RollHistoryReducer } from './store/reducer/roll-history.reducer';
 import { HistoryPipe } from './history.pipe';
 import { RollMessageComponent } from './roll-message/roll-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     GmTableComponent,
     GmTableItemEditComponent,
     RollMessageComponent,
-    HistoryPipe
+    HistoryPipe,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

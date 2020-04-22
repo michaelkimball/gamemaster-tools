@@ -1,16 +1,26 @@
 <div class="container">
     <form [formGroup]="tableForm" (ngSubmit)="onSubmit(tableForm.value)">
-        <mat-card>
-            <mat-card-title>{{ tableData.name }}</mat-card-title>
+    <mat-card>
+        <div class="title-bar">
+            <mat-card-title [className]="isEditing ? 'hidden' : 'mat-card-title'">{{ tableData.name }}</mat-card-title>
+            <div [className]="!isEditing ? 'hidden' : 'table-title'">
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="tableName" (keydown)="onTableNameKeypress($event, tableForm.value.tableName)">
+                </mat-form-field>
+            </div>
+            <fa-icon [icon]="faPen" (click)="isEditing = true"  [className]="isEditing ? 'hidden' : 'ng-fa-icon'"></fa-icon>
+            <fa-icon [icon]="faCheck" (click)="finishEditingName(tableForm.value.tableName)"  [className]="!isEditing ? 'hidden' : 'ng-fa-icon'"></fa-icon>
+            <fa-icon [icon]="faTrashAlt" (click)="deleteTable()"></fa-icon>
+        </div>
             <mat-card-content>
                 <div class="card-content-inline">
                     <mat-form-field appearance="outline">
                         <mat-label>Item</mat-label>
-                        <input id="description" matInput formControlName="description">
+                        <input matInput formControlName="description">
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Weight</mat-label>
-                        <input id="weight" type="number" matInput formControlName="weight">
+                        <input type="number" matInput formControlName="weight">
                     </mat-form-field>
                     <button mat-mini-fab color="accent" aria-label="Add table item button with plus sign">
                         <mat-icon>add</mat-icon>

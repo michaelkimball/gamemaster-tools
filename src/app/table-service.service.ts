@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Table } from './store/model/table.model';
 
 @Injectable({
@@ -7,6 +7,7 @@ import { Table } from './store/model/table.model';
 })
 export class TableServiceService {
   private TABLE_URL = 'http://localhost:3000/tables';
+  // private TABLE_URL = 'http://localhost:8080/tables';
   constructor(private http: HttpClient) { }
 
   getTables() {
@@ -14,6 +15,9 @@ export class TableServiceService {
   }
 
   addTable(table: Table){
+    new HttpHeaders({
+
+    })
     return this.http.post(this.TABLE_URL, table);
   }
 

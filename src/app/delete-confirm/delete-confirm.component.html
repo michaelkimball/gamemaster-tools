@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete Item</h2>
+<mat-dialog-content>
+    Are you sure you want to delete <em>{{data}}</em>?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button (click)="onYesClick()" mat-flat-button color="warn">Yes</button>
+    <button (click)="onNoClick()" mat-flat-button color="primary">No</button>
+</mat-dialog-actions>

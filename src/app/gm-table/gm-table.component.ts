@@ -7,12 +7,14 @@ import { GmTableItemEditComponent } from '../gm-table-item-edit/gm-table-item-ed
 import { Table, Item } from '../store/model/table.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/model/app-state.model';
-import { UpdateTableAction } from '../store/action/table.action';
+import { UpdateTableAction, DeleteTableAction } from '../store/action/table.action';
 import { v4 as uuid } from 'uuid';
 import { AddRollHistoryAction } from '../store/action/roll-history.action';
 import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RollMessageComponent } from '../roll-message/roll-message.component';
+import { faPen, faCheck, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 
 @Component({
   selector: 'gm-table',
@@ -21,10 +23,14 @@ import { RollMessageComponent } from '../roll-message/roll-message.component';
 })
 export class GmTableComponent implements OnInit {
   @Input('tableData') tableData: Table;
+  isEditing: boolean = false;
   tableForm;
   totalWeight: number = 0;
   displayedColumns: string[] = ['position', 'weight', 'item'];
   @ViewChild(MatTable) table: MatTable<Item>;
+  faPen = faPen;
+  faCheck = faCheck;
+  faTrashAlt = faTrashAlt;
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -33,14 +39,23 @@ export class GmTableComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.tableForm = this.formBuilder.group({
+      tableName: '',
       description: '',
       weight: 1
     });
   }
 
   ngOnInit(): void {
+    this.tableForm.controls['tableName'].setValue(this.tableData.name);
     if(this.tableData.items.length > 0){
       this.totalWeight = this.tableData.items.map((data) => data.weight).reduce((weight1, weight2) => weight1 + weight2);
+    }
+  }
+
+  onTableNameKeypress(event, name){
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.finishEditingName(name);
     }
   }
 
@@ -127,4 +142,23 @@ export class GmTableComponent implements OnInit {
     });
   }
 
+  finishEditingName(name: string){
+    this.isEditing = false;
+    this.tableData = {
+      ...this.tableData,
+      name: name
+    };
+    this.store.dispatch(new UpdateTableAction(this.tableData));
+  }
+
+  deleteTable(){
+    let dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      data: this.tableData.name
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.store.dispatch(new DeleteTableAction(this.tableData.id));
+      }
+    });
+  }
 }
