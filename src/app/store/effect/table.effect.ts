@@ -11,10 +11,8 @@ export class TableEffects {
     @Effect() loadTables$ = this.actions$.pipe(
         ofType<LoadTablesAction>(TableActionTypes.LOAD_TABLES),
         mergeMap((action) => 
-            this.tableService.getTables(action.payload).pipe(
+            this.tableService.getTables(action.pageNumber, action.name).pipe(
                 map(data => {
-                    console.log(action);
-                    console.log(data);
                     return new LoadTablesSuccessAction(data)
                 }),
                 catchError(error => of(new LoadTablesFailureAction(error)))

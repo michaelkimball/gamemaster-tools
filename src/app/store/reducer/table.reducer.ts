@@ -15,7 +15,6 @@ export function TableReducer(state: TableState = initialState, action: TableActi
                 loading: true
             };
         case TableActionTypes.LOAD_TABLES_SUCCESS:
-            console.log(action);
             return {
                 ...state,
                 searchResult: {

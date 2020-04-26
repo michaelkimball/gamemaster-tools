@@ -20,7 +20,6 @@ export class GmTableItemEditComponent {
     this.dialogRef.close(formData);
   }
   onDeleteClick(){
-    console.log('delete clicked');
     this.dialogRef.close('delete');
   }
 }

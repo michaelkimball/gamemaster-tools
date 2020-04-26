@@ -75,11 +75,8 @@ export class GmTableComponent implements OnInit {
           items: items
         };
       } else {
-        console.log(result);
         let items = [...this.tableData.items.filter(table => table.id != result.id), result];
-        console.log(items);
         moveItemInArray(items, items.length-1, result.position-1);
-        console.log(items);
         this.tableData = {
           ...this.tableData,
           items: items
@@ -121,7 +118,6 @@ export class GmTableComponent implements OnInit {
 
   onRollClick(){
     let roll = Math.floor(Math.random() * this.totalWeight) + 1;
-    console.log(roll);
     for(let i = 0; i < this.tableData.items.length; i++){
       if(this.tableData.items[i].weight >= roll){
         let rollLog = `${formatDate(new Date(), 'M/d/yy, h:mm:ss a', 'en-US')}   ${this.tableData.items[i].description}`;

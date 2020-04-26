@@ -18,7 +18,7 @@ export enum TableActionTypes {
 
 export class LoadTablesAction implements Action {
     readonly type = TableActionTypes.LOAD_TABLES;
-    constructor(public payload?: number) {}
+    constructor(public pageNumber?: number, public name?: string) {}
 }
 
 export class LoadTablesSuccessAction implements Action {

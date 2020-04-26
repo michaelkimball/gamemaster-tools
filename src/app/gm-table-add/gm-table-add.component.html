@@ -1,25 +1,23 @@
 <div class="container">
+    <form [formGroup]="tableSearchForm" (ngSubmit)="$event.preventDefault();">
+        <mat-form-field appearance="outline">
+            <mat-label>Table Search</mat-label>
+            <input id="table-search" matInput formControlName="tableSearch" (keyup)="onTableSearchKeyup(tableSearchForm.value.tableSearch)">
+            <fa-icon matSuffix [icon]="faSearch"></fa-icon>
+        </mat-form-field>
+    </form>
     <form [formGroup]="tableAddForm" (ngSubmit)="onSubmit(tableAddForm.value)">
-        <mat-card>
-            <mat-card-title>Add New Table</mat-card-title>
-            <mat-card-content class="card-content-inline">
-                <mat-form-field appearance="outline">
-                    <mat-label>Name</mat-label>
-                    <input id="name" matInput formControlName="name">
-                </mat-form-field>
-                <button mat-mini-fab color="accent" aria-label="Add table button with plus sign">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </mat-card-content>
-        </mat-card>
+        <div class="table-name-container">
+            <mat-form-field appearance="outline">
+                <mat-label>New Table Name</mat-label>
+                <input id="name" matInput formControlName="name">
+            </mat-form-field>
+            <button mat-mini-fab color="accent" aria-label="Add table button with plus sign">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
     </form>
 </div>
-<form [formGroup]="tableSearchForm" (ngSubmit)="$event.preventDefault();">
-    <mat-form-field appearance="outline">
-        <mat-label>Table Search</mat-label>
-        <input id="table-search" matInput formControlName="tableSearch">
-    </mat-form-field>
-</form>
 <div class="tables">
     <gm-table *ngFor="let table of (searchResults$ | async).results" [tableData]="table" ></gm-table>
 </div>

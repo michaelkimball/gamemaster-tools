@@ -10,15 +10,16 @@ export class TableServiceService {
   private TABLE_URL = 'http://localhost:8080/tables';
   constructor(private http: HttpClient) { }
 
-  getTables(pageNumber?: number) {
-    console.log(pageNumber);
-    let options = {}
-    if(pageNumber !== undefined){
-      options['params'] = {
-        page: pageNumber
-      }
+  getTables(pageNumber?: number, name?: string) {
+    let options = {
+      params: {}
     }
-    console.log(options);
+    if(pageNumber !== undefined){
+      options.params['page'] = pageNumber
+    }
+    if(name !== undefined){
+      options.params['name'] = name;
+    }
     return this.http.get<TableSearchResult>(this.TABLE_URL, options);
   }
 
