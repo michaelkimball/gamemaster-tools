@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Table } from './store/model/table.model';
+import { Table, TableSearchResult } from './store/model/table.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableServiceService {
-  private TABLE_URL = 'http://localhost:3000/tables';
-  // private TABLE_URL = 'http://localhost:8080/tables';
+  // private TABLE_URL = 'http://localhost:3000/tables';
+  private TABLE_URL = 'http://localhost:8080/tables';
   constructor(private http: HttpClient) { }
 
-  getTables() {
-    return this.http.get<Array<Table>>(this.TABLE_URL);
+  getTables(pageNumber?: number) {
+    console.log(pageNumber);
+    let options = {}
+    if(pageNumber !== undefined){
+      options['params'] = {
+        page: pageNumber
+      }
+    }
+    console.log(options);
+    return this.http.get<TableSearchResult>(this.TABLE_URL, options);
   }
 
   addTable(table: Table){
-    new HttpHeaders({
-
-    })
     return this.http.post(this.TABLE_URL, table);
   }
 

@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -28,7 +29,8 @@ import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatTableModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -41,7 +43,8 @@ import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatTableModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: MatDialogRef, useValue: {} },

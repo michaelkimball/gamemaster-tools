@@ -10,9 +10,13 @@ import { of } from 'rxjs';
 export class TableEffects {
     @Effect() loadTables$ = this.actions$.pipe(
         ofType<LoadTablesAction>(TableActionTypes.LOAD_TABLES),
-        mergeMap(() => 
-            this.tableService.getTables().pipe(
-                map(data => new LoadTablesSuccessAction(data)),
+        mergeMap((action) => 
+            this.tableService.getTables(action.payload).pipe(
+                map(data => {
+                    console.log(action);
+                    console.log(data);
+                    return new LoadTablesSuccessAction(data)
+                }),
                 catchError(error => of(new LoadTablesFailureAction(error)))
             )
         )

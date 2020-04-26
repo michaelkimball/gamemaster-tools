@@ -14,6 +14,16 @@
         </mat-card>
     </form>
 </div>
+<form [formGroup]="tableSearchForm" (ngSubmit)="$event.preventDefault();">
+    <mat-form-field appearance="outline">
+        <mat-label>Table Search</mat-label>
+        <input id="table-search" matInput formControlName="tableSearch">
+    </mat-form-field>
+</form>
 <div class="tables">
-    <gm-table *ngFor="let table of tables$ | async" [tableData]="table" ></gm-table>
+    <gm-table *ngFor="let table of (searchResults$ | async).results" [tableData]="table" ></gm-table>
 </div>
+<mat-paginator [length]="(searchResults$ | async).totalCount"
+               [pageSize]="(searchResults$ | async).pageSize"
+               (page)="page($event)">
+</mat-paginator>

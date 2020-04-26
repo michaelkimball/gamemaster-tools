@@ -1,8 +1,8 @@
-import { TableState } from "../model/table.model";
+import { TableState, TableSearchResult } from "../model/table.model";
 import { TableAction, TableActionTypes } from '../action/table.action';
 
 const initialState: TableState = {
-    list: [],
+    searchResult: new TableSearchResult(),
     loading: false,
     error: undefined
 };
@@ -18,7 +18,9 @@ export function TableReducer(state: TableState = initialState, action: TableActi
             console.log(action);
             return {
                 ...state,
-                list: action.payload,
+                searchResult: {
+                    ...action.payload,
+                },
                 loading: false
             };
         case TableActionTypes.LOAD_TABLES_FAILURE:
@@ -33,7 +35,7 @@ export function TableReducer(state: TableState = initialState, action: TableActi
                 loading: true
             };
         case TableActionTypes.ADD_TABLE_SUCCESS:
-            return  { ...state, list: [ ...state.list, action.payload], loading: false };
+            return  { ...state, loading: false };
         case TableActionTypes.ADD_TABLE_FAILURE:
             return {
                 ...state,
@@ -46,13 +48,15 @@ export function TableReducer(state: TableState = initialState, action: TableActi
                 loading: true
             };
         case TableActionTypes.UPDATE_TABLE_SUCCESS:
-            let position = state.list.map(table => table.id).indexOf(action.payload.id);
-            console.log(position);
-            let list = [ ...state.list.filter(table => table.id != action.payload.id)];
+            let position = state.searchResult.results.map(table => table.id).indexOf(action.payload.id);
+            let list = [ ...state.searchResult.results.filter(table => table.id != action.payload.id)];
             list.splice(position, 0, action.payload);
             return  {
                 ...state, 
-                list: list, 
+                searchResult: {
+                    ...state.searchResult,
+                    results: list
+                },
                 loading: false 
             };
         case TableActionTypes.UPDATE_TABLE_FAILURE:
@@ -67,7 +71,11 @@ export function TableReducer(state: TableState = initialState, action: TableActi
                 loading: true
             };
         case TableActionTypes.DELETE_TABLE_SUCCESS:
-            return  { ...state, list: state.list.filter(table => table.id !== action.payload), loading: false };
+            return  { ...state, 
+                searchResult: {
+                    ...state.searchResult,
+                    results: state.searchResult.results.filter(table => table.id !== action.payload)
+                }, loading: false };
         case TableActionTypes.DELETE_TABLE_FAILURE:
             return {
                 ...state,

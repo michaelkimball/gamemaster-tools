@@ -1,7 +1,12 @@
 export interface TableState {
     loading: boolean;
-    list: Array<Table>;
+    searchResult: TableSearchResult;
     error: Error;
+}
+export class TableSearchResult {
+    pageSize: number;
+    totalCount: number;
+    results: Array<Table>;
 }
 export class Table {
     id: string;

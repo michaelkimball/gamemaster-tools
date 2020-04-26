@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Table } from '../model/table.model';
+import { Table, TableSearchResult } from '../model/table.model';
 
 export enum TableActionTypes {
     LOAD_TABLES = '[TABLES] Load Tables',
@@ -18,11 +18,12 @@ export enum TableActionTypes {
 
 export class LoadTablesAction implements Action {
     readonly type = TableActionTypes.LOAD_TABLES;
+    constructor(public payload?: number) {}
 }
 
 export class LoadTablesSuccessAction implements Action {
     readonly type = TableActionTypes.LOAD_TABLES_SUCCESS;
-    constructor(public payload: Array<Table>) {}
+    constructor(public payload: TableSearchResult) {}
 }
 
 export class LoadTablesFailureAction implements Action {
