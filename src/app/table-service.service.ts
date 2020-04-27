@@ -27,6 +27,14 @@ export class TableServiceService {
     return this.http.post(this.TABLE_URL, table);
   }
 
+  importTables(tables: Array<Table>){
+    console.log(tables);
+    let request = {
+      tables: tables
+    };
+    return this.http.post(this.TABLE_URL + '/import', request);
+  }
+
   updateTable(table: Table){
     return this.http.put(`${this.TABLE_URL}/${table.id}`, table);
   }

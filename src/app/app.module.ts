@@ -22,6 +22,7 @@ import { HistoryPipe } from './history.pipe';
 import { RollMessageComponent } from './roll-message/roll-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { GmTableImportComponent } from './gm-table-import/gm-table-import.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.componen
     GmTableItemEditComponent,
     RollMessageComponent,
     HistoryPipe,
-    DeleteConfirmComponent
+    DeleteConfirmComponent,
+    GmTableImportComponent
   ],
   imports: [
     BrowserModule,

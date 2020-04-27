@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Import Tables</h2>
+<div mat-dialog-content>
+    <mat-form-field class="import-container">
+        <mat-label>Import Data</mat-label>
+        <textarea matInput class="import-content" [placeholder]="placeholder" [(ngModel)]="importData"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onImportClick()">Import</button>
+</div>

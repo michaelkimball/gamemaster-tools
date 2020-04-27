@@ -17,6 +17,9 @@
             </button>
         </div>
     </form>
+    <div class="import">
+        <button mat-raised-button color="primary" (click)="openImport()" >Import</button>
+    </div>
 </div>
 <div class="tables">
     <gm-table *ngFor="let table of (searchResults$ | async).results" [tableData]="table" ></gm-table>

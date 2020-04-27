@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { LoadTablesAction, TableActionTypes, LoadTablesSuccessAction, LoadTablesFailureAction, AddTableAction, AddTableSuccessAction, AddTableFailureAction, UpdateTableAction, UpdateTableSuccessAction, UpdateTableFailureAction, DeleteTableAction, DeleteTableSuccessAction, DeleteTableFailureAction } from '../action/table.action';
+import { LoadTablesAction, TableActionTypes, LoadTablesSuccessAction, LoadTablesFailureAction, AddTableAction, AddTableSuccessAction, AddTableFailureAction, UpdateTableAction, UpdateTableSuccessAction, UpdateTableFailureAction, DeleteTableAction, DeleteTableSuccessAction, DeleteTableFailureAction, ImportTablesAction, ImportTablesSuccessAction, ImportTablesFailureAction } from '../action/table.action';
 import { TableServiceService as TableService } from 'src/app/table-service.service';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -26,6 +26,16 @@ export class TableEffects {
             this.tableService.addTable(data.payload).pipe(
                 map(() => new AddTableSuccessAction(data.payload)),
                 catchError(error => of(new AddTableFailureAction(error)))
+            )
+        )
+    )
+
+    @Effect() importTables$ = this.actions$.pipe(
+        ofType<ImportTablesAction>(TableActionTypes.IMPORT_TABLES),
+        mergeMap((data) =>
+            this.tableService.importTables(data.payload).pipe(
+                map(() => new ImportTablesSuccessAction(data.payload)),
+                catchError(error => of(new ImportTablesFailureAction(error)))
             )
         )
     )

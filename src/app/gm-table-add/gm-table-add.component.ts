@@ -8,6 +8,8 @@ import { LoadTablesAction, AddTableAction } from '../store/action/table.action';
 import { v4 as uuid } from 'uuid';
 import { debounceTime } from 'rxjs/operators';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { GmTableImportComponent } from '../gm-table-import/gm-table-import.component';
 
 @Component({
   selector: 'gm-table-add',
@@ -26,7 +28,8 @@ export class GmTableAddComponent implements OnInit {
   tableSearchTyping: Subject<string> = new Subject();
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public dialog: MatDialog
   ) {
     this.tableAddForm = this.formBuilder.group({
       name: ''
@@ -64,6 +67,10 @@ export class GmTableAddComponent implements OnInit {
   page(event){
     this.pageIndex = event.pageIndex;
     this.store.dispatch(new LoadTablesAction(event.pageIndex, this.tableSearchForm.value.tableSearch));
+  }
+
+  openImport(){
+    this.dialog.open(GmTableImportComponent, { width: '80%' });
   }
 
 }

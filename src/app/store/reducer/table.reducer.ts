@@ -41,6 +41,19 @@ export function TableReducer(state: TableState = initialState, action: TableActi
                 loading: false,
                 error: action.payload
             };
+        case TableActionTypes.IMPORT_TABLES:
+            return {
+                ...state,
+                loading: true
+            };
+        case TableActionTypes.IMPORT_TABLES_SUCCESS:
+            return  { ...state, loading: false };
+        case TableActionTypes.IMPORT_TABLES_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
         case TableActionTypes.UPDATE_TABLE:
             return {
                 ...state,

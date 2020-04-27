@@ -8,6 +8,9 @@ export enum TableActionTypes {
     ADD_TABLE = '[TABLES] Add Table',
     ADD_TABLE_SUCCESS = '[TABLES] Add Table Success',
     ADD_TABLE_FAILURE = '[TABLES] Add Table Failure',
+    IMPORT_TABLES = '[TABLES] Import Tables',
+    IMPORT_TABLES_SUCCESS = '[TABLES] Import Tables Success',
+    IMPORT_TABLES_FAILURE = '[TABLES] Import Tables Failure',
     UPDATE_TABLE = '[TABLES] Update Table',
     UPDATE_TABLE_SUCCESS = '[TABLES] Update Table Success',
     UPDATE_TABLE_FAILURE = '[TABLES] Update Table Failure',
@@ -43,6 +46,21 @@ export class AddTableSuccessAction implements Action {
 
 export class AddTableFailureAction implements Action {
     readonly type = TableActionTypes.ADD_TABLE_FAILURE;
+    constructor(public payload: Error) {}
+}
+
+export class ImportTablesAction implements Action {
+    readonly type = TableActionTypes.IMPORT_TABLES;
+    constructor(public payload: Array<Table>) {}
+}
+
+export class ImportTablesSuccessAction implements Action {
+    readonly type = TableActionTypes.IMPORT_TABLES_SUCCESS;
+    constructor(public payload: Array<Table>) {}
+}
+
+export class ImportTablesFailureAction implements Action {
+    readonly type = TableActionTypes.IMPORT_TABLES_FAILURE;
     constructor(public payload: Error) {}
 }
 
@@ -83,6 +101,9 @@ export type TableAction =
     AddTableAction |
     AddTableSuccessAction |
     AddTableFailureAction |
+    ImportTablesAction |
+    ImportTablesSuccessAction |
+    ImportTablesFailureAction |
     UpdateTableAction |
     UpdateTableSuccessAction |
     UpdateTableFailureAction |
